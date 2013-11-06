@@ -674,14 +674,26 @@ input.json-number-input {
 .demo-code-input {
 	border: 2px solid #666;
 	border-radius: 10px;
-	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
-	padding: 0.5em;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+	padding: 0.25em;
 	font-family: sans-serif;
+	background-color: #FFF;
+}
+
+.demo-code-input-title {
+	float: left;
+	width: 80px;
+	font-weight: bold;
+	text-align: right;
+	font-size: 0.8em;
+	padding-top: 0.4em;
 }
 
 .demo-code-javascript, .demo-code-html {
+	margin-left: 80px;
 	position: relative;
 	height: 5em;
+	padding: 0.25em;
 }
 
 .demo-code-result {
@@ -693,6 +705,7 @@ input.json-number-input {
 	margin-left: 1em;
 	margin-right: 1em;
 	padding: 0.5em;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .demo-code-console {
@@ -705,6 +718,7 @@ input.json-number-input {
 	margin-left: 1em;
 	margin-right: 1em;
 	padding: 0.5em;
+	box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .demo-code-console-line, .demo-code-console-error {

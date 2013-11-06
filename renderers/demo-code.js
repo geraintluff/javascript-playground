@@ -2,7 +2,9 @@ Jsonary.render.register({
 	renderHtml: function (data, context) {
 		var result = '<div class="demo-code">';
 		result += '<div class="demo-code-input">';
+		result += '<div class="demo-code-input-title">HTML:</div>';
 		result += '<div class="demo-code-html">' + context.renderHtml(data.property('html')) + '</div>';
+		result += '<div class="demo-code-input-title">JavaScript:</div>';
 		result += '<div class="demo-code-javascript">' + context.renderHtml(data.property('js')) + '</div>';
 		result += '</div>';
 		return result + '</div>';
@@ -64,7 +66,7 @@ Jsonary.render.register({
 	},
 	filter: {
 		type: 'object',
-		schema: '/schemas/demo-code'
+		schema: 'schemas/demo-code.json'
 	}
 });
 
