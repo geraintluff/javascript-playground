@@ -2,7 +2,7 @@
 (function() {
 
 
-/**** /Users/geraint/Sites/jsonary/node-package/core/jsonary-core.js ****/
+/**** jsonary-core.js ****/
 
 	/* Bundled on 2013-11-06 */
 	(function() {
@@ -10055,7 +10055,7 @@
 	return this;
 	}).call(this);var Jsonary = this.Jsonary;
 
-/**** renderers/demo-code.js ****/
+/**** demo-code.js ****/
 
 	Jsonary.render.register({
 		renderHtml: function (data, context) {
@@ -10168,7 +10168,7 @@
 		}
 	});
 
-/**** /Users/geraint/Sites/jsonary/node-package/plugins/jsonary.undo.js ****/
+/**** jsonary.undo.js ****/
 
 	(function () {
 		if (typeof window == 'undefined') {
