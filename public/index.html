@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Jsonary test</title>
+		<link rel="stylesheet" href="bundle.css">
+	</head>
+	<body>
+		<div id="jsonary-target"></div>
+		<script src="ace/ace.js"></script>
+		<script src="bundle.js"></script>
+		<script>
+			Jsonary.renderValue('jsonary-target', [
+				{
+					html: '<h3>Title</h3>\n\n<div style="align: center">Here is some text</div>',
+					js: 'console.log("Hello, world!")'
+				}
+			], {"$ref": "/schemas/demo-code#/definitions/array"}, function (value) {
+				console.log(value);
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+{
+	"title": "Demo JavaScript code",
+	"type": "object",
+	"properties": {
+		"js": {
+			"type": "string",
+			"media": {"type": "application/javascript"}
+		},
+		"html": {
+			"type": "string",
+			"media": {"type": "text/html"}
+		}
+	},
+	"required": ["html", "js"],
+	"definitions": {
+		"array": {
+			"type": "array",
+			"items": {
+				"oneOf": [
+					{"$ref": "#"},
+					{
+						"title": "Plain text",
+						"type": "string"
+					}
+				]
+			},
+			"minItems": 1
+		}
+	}
+}
