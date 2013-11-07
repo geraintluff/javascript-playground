@@ -21,8 +21,9 @@
 				"oneOf": [
 					{"$ref": "#"},
 					{
-						"title": "Plain text",
-						"type": "string"
+						"title": "Markdown",
+						"type": "string",
+						"format": "markdown"
 					}
 				]
 			},
