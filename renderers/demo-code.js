@@ -99,11 +99,12 @@ Jsonary.render.register({
 		data.schemas().any(function (index, schema) {
 			mediaType = mediaType || schema.data.get('/media/type');
 		});
-		if (mediaType === 'application/javascript') {
-			editor.getSession().setMode("ace/mode/javascript");
-		} else if (mediaType === 'text/html') {
-			editor.setTheme("ace/theme/github");
+		if (mediaType === 'text/html') {
+			editor.setTheme("ace/theme/tomorrow");
 			editor.getSession().setMode("ace/mode/html");
+		} else if (mediaType === 'application/javascript') {
+			editor.setTheme("ace/theme/tomorrow");
+			editor.getSession().setMode("ace/mode/javascript");
 		}
 	},
 	filter: {
