@@ -71,23 +71,30 @@ Jsonary.render.register({
 });
 
 Jsonary.render.register({
-	renderHtml: function (data, context) {
-		var elementId = context.getElementId();
-		return '<div class="ace-editor" id="' + elementId + '">' + Jsonary.escapeHtml(data.value()) + '</div>';
-	},
 	render: function (element, data, context) {
-		for (var i = 0; i < element.childNodes.length; i++) {
-			if (element.childNodes[i].nodeType === 1) {
-				element = element.childNodes[i];
-				break;
-			}
-		}
+		var container = document.createElement('div');
+		container.className = "ace-editor-container";
+		element.appendChild(container);
+		var editorElement = document.createElement('div');
+		editorElement.className = "ace-editor";
+		editorElement.innerHTML = Jsonary.escapeHtml(data.value());
+		editorElement.id = context.getElementId();
+		container.appendChild(editorElement);
 
-		var editor = ace.edit(element.id);
+		var editor = ace.edit(editorElement.id);
 		editor.on('blur', function () {
 			var jsCode = editor.getSession().getValue();
 			data.setValue(jsCode);
 		});
+		function updateHeight() {
+			var jsCode = editor.getSession().getValue();
+			var lines = Math.min(15, Math.max(1, jsCode.split(/\n/g).length + 1));
+			container.style.height = lines + "em";
+			editor.resize();
+		}
+		editor.on('change', updateHeight);
+		updateHeight();
+
 		var mediaType = null;
 		data.schemas().any(function (index, schema) {
 			mediaType = mediaType || schema.data.get('/media/type');

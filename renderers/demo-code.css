@@ -22,9 +22,14 @@
 
 .demo-code-javascript, .demo-code-html {
 	margin-left: 80px;
+	padding: 0.25em;
+	position: relative;
+}
+
+.ace-editor-container {
+	width: 100%;
 	position: relative;
 	height: 5em;
-	padding: 0.25em;
 }
 
 .demo-code-result {
