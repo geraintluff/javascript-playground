@@ -9,6 +9,23 @@ Jsonary.render.register({
 		result += '</div>';
 		return result + '</div>';
 	},
+	runCode: function (data, context) {
+		setTimeout(function () {
+			context.htmlTarget.innerHTML = data.get('/html') || "";
+			context.consoleTarget.innerHTML = "";
+			var jsCode = data.get('/js');
+			try {
+				var func = new Function('element', 'console', jsCode);
+				func.call(context.htmlTarget, context.htmlTarget, context.consoleWrapped);
+			} catch (e) {
+				context.consoleWrapped.error(e);
+			}
+		}, 10);
+	},
+	update: function (element, data, context) {
+		this.runCode(data, context);
+		return false;
+	},
 	render: function (element, data, context) {
 		for (var i = 0; i < element.childNodes.length; i++) {
 			if (element.childNodes[i].nodeType === 1) {
@@ -19,9 +36,6 @@ Jsonary.render.register({
 
 		var result = document.createElement('div');
 		result.className = "demo-code-result";
-		if (data.get('/html')) {
-			result.innerHTML = data.get('/html');
-		}
 
 		var consoleResult = document.createElement('div');
 		consoleResult.className = "demo-code-console";
@@ -48,21 +62,13 @@ Jsonary.render.register({
 			logLine.className = "demo-code-console-error";
 			logLine.innerHTML = '<span class="demo-code-console-line-mark">&gt;</span>' + Jsonary.escapeHtml(value);
 			consoleResult.appendChild(logLine);
-		};		
-		var jsCode = data.get('/js');
+		};	
+		context.consoleWrapped = consoleWrapped;	
+		context.htmlTarget = result;
+		context.consoleTarget = consoleResult;
 		element.appendChild(result);
 		element.appendChild(consoleResult);
-		setTimeout(function () {
-			try {
-				var func = new Function('element', 'console', jsCode);
-				func.call(result, result, consoleWrapped);
-			} catch (e) {
-				consoleWrapped.error(e);
-			}
-		}, 10);
-	},
-	update: function () {
-		return true;
+		this.runCode(data, context);
 	},
 	filter: {
 		type: 'object',
@@ -82,6 +88,7 @@ Jsonary.render.register({
 		container.appendChild(editorElement);
 
 		var editor = ace.edit(editorElement.id);
+		context.editor = editor;
 		editor.on('blur', function () {
 			var jsCode = editor.getSession().getValue();
 			data.setValue(jsCode);
@@ -106,6 +113,10 @@ Jsonary.render.register({
 			editor.setTheme("ace/theme/tomorrow");
 			editor.getSession().setMode("ace/mode/javascript");
 		}
+	},
+	update: function (element, data, context) {
+		var jsCode = context.editor.getSession().getValue();
+		return data.value() !== jsCode;
 	},
 	filter: {
 		readOnly: false,
